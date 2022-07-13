@@ -9,8 +9,6 @@ If you publish work using this script the most relevant publication is:
         PsychoPy2: Experiments in behavior made easy Behav Res 51: 195.
         https://doi.org/10.3758/s13428-018-01193-y
 
-#Trigger is t, scanning should start immediately (no dummy scans)
-
 """
 
 from __future__ import absolute_import, division
@@ -112,6 +110,19 @@ text_2 = visual.TextStim(win=win, name='text_2',
 # Initialize components for Routine "scanner_TR"
 scanner_TRClock = core.Clock()
 scanner_F = keyboard.Keyboard()
+text_4 = visual.TextStim(win=win, name='text_4',
+    text='',
+    font='Open Sans',
+    pos=(0, 0), height=0.1, wrapWidth=None, ori=0.0, 
+    color='white', colorSpace='rgb', opacity=None, 
+    languageStyle='LTR',
+    depth=-1.0);
+
+# Initialize components for Routine "countdown"
+countdownClock = core.Clock()
+total_dummy = 6
+curr_dummy = 0
+countdown_msg = f'dummy scans remaining: {total_dummy - curr_dummy}'
 
 # Initialize components for Routine "movie"
 movieClock = core.Clock()
@@ -323,6 +334,24 @@ for thisSet_volume_loop in set_volume_loops:
     set_volume_loops.addData('text_2.stopped', text_2.tStopRefresh)
 # completed 5.0 repeats of 'set_volume_loops'
 
+# set up handler to look after randomisation of conditions etc
+dummy = data.TrialHandler(nReps=asarray(total_dummy), method='random', 
+    extraInfo=expInfo, originPath=-1,
+    trialList=[None],
+    seed=None, name='dummy')
+thisExp.addLoop(dummy)  # add the loop to the experiment
+thisDummy = dummy.trialList[0]  # so we can initialise stimuli with some values
+# abbreviate parameter names if possible (e.g. rgb = thisDummy.rgb)
+if thisDummy != None:
+    for paramName in thisDummy:
+        exec('{} = thisDummy[paramName]'.format(paramName))
+
+for thisDummy in dummy:
+    currentLoop = dummy
+    # abbreviate parameter names if possible (e.g. rgb = thisDummy.rgb)
+    if thisDummy != None:
+        for paramName in thisDummy:
+            exec('{} = thisDummy[paramName]'.format(paramName))
 
 # ------Prepare to start Routine "scanner_TR"-------
 continueRoutine = True
@@ -354,6 +383,28 @@ while continueRoutine:
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
 
+     # ------Prepare to start Routine "scanner_TR"-------
+    continueRoutine = True
+    # update component parameters for each repeat
+    scanner_F.keys = []
+    scanner_F.rt = []
+    _scanner_F_allKeys = []
+    text_4.setText(countdown_msg)
+    # keep track of which components have finished
+    scanner_TRComponents = [scanner_F, text_4]
+    for thisComponent in scanner_TRComponents:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    scanner_TRClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
+    frameN = -1
+    
     # *scanner_F* updates
     waitOnFlip = False
     if scanner_F.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
@@ -375,20 +426,152 @@ while continueRoutine:
             scanner_F.rt = _scanner_F_allKeys[-1].rt
             # a response ends the routine
             continueRoutine = False
+            
+       # -------Run Routine "scanner_TR"-------
+    while continueRoutine:
+        # get current time
+        t = scanner_TRClock.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=scanner_TRClock)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
 
+        # *scanner_F* updates
+        waitOnFlip = False
+        if scanner_F.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            scanner_F.frameNStart = frameN  # exact frame index
+            scanner_F.tStart = t  # local t and not account for scr refresh
+            scanner_F.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(scanner_F, 'tStartRefresh')  # time at next scr refresh
+            scanner_F.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(scanner_F.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(scanner_F.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if scanner_F.status == STARTED and not waitOnFlip:
+            theseKeys = scanner_F.getKeys(keyList=['t'], waitRelease=False)
+            _scanner_F_allKeys.extend(theseKeys)
+            if len(_scanner_F_allKeys):
+                scanner_F.keys = _scanner_F_allKeys[-1].name  # just the last key pressed
+                scanner_F.rt = _scanner_F_allKeys[-1].rt
+                # a response ends the routine
+                continueRoutine = False
+
+        # *text_4* updates
+        if text_4.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            text_4.frameNStart = frameN  # exact frame index
+            text_4.tStart = t  # local t and not account for scr refresh
+            text_4.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text_4, 'tStartRefresh')  # time at next scr refresh
+            text_4.setAutoDraw(True)
+
+        # check for quit (typically the Esc key)
+        if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+            core.quit()
+
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in scanner_TRComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()         
+            
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
         core.quit()
 
+    # -------Ending Routine "scanner_TR"-------
     # check if all components have finished
     if not continueRoutine:  # a component has requested a forced-end of Routine
         break
     continueRoutine = False  # will revert to True if at least one component still running
+    
     for thisComponent in scanner_TRComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # check responses
+    if scanner_F.keys in ['', [], None]:  # No response was made
+        scanner_F.keys = None
+    dummy.addData('scanner_F.keys',scanner_F.keys)
+    if scanner_F.keys != None:  # we had a response
+        dummy.addData('scanner_F.rt', scanner_F.rt)
+    dummy.addData('scanner_F.started', scanner_F.tStartRefresh)
+    dummy.addData('scanner_F.stopped', scanner_F.tStopRefresh)
+    dummy.addData('text_4.started', text_4.tStartRefresh)
+    dummy.addData('text_4.stopped', text_4.tStopRefresh)
+    # the Routine "scanner_TR" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+
+    # ------Prepare to start Routine "countdown"-------
+    continueRoutine = True
+    # update component parameters for each repeat
+    curr_dummy = curr_dummy + 1
+
+    if curr_dummy <= total_dummy:
+        countdown_msg = f'dummy scans remaining: {total_dummy - curr_dummy}'
+
+    # keep track of which components have finished
+    countdownComponents = []
+    for thisComponent in countdownComponents:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    countdownClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
+    frameN = -1
+
+    # -------Run Routine "countdown"-------
+    while continueRoutine:
+        # get current time
+        t = countdownClock.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=countdownClock)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+
+        # check for quit (typically the Esc key)
+        if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+            core.quit()
+
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in countdownComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+
+    # -------Ending Routine "countdown"-------
+    for thisComponent in countdownComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # the Routine "countdown" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    thisExp.nextEntry()
+        
         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
             continueRoutine = True
             break  # at least one component has not yet finished
 
+# completed asarray(total_dummy) repeats of 'dummy'
     # refresh the screen
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
