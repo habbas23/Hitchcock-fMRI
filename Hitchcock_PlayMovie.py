@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.1.2),
@@ -353,37 +353,7 @@ for thisDummy in dummy:
         for paramName in thisDummy:
             exec('{} = thisDummy[paramName]'.format(paramName))
 
-# ------Prepare to start Routine "scanner_TR"-------
-continueRoutine = True
-# update component parameters for each repeat
-scanner_F.keys = []
-scanner_F.rt = []
-_scanner_F_allKeys = []
-# keep track of which components have finished
-scanner_TRComponents = [scanner_F]
-for thisComponent in scanner_TRComponents:
-    thisComponent.tStart = None
-    thisComponent.tStop = None
-    thisComponent.tStartRefresh = None
-    thisComponent.tStopRefresh = None
-    if hasattr(thisComponent, 'status'):
-        thisComponent.status = NOT_STARTED
-# reset timers
-t = 0
-_timeToFirstFrame = win.getFutureFlipTime(clock="now")
-scanner_TRClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
-frameN = -1
-
-# -------Run Routine "scanner_TR"-------
-while continueRoutine:
-    # get current time
-    t = scanner_TRClock.getTime()
-    tThisFlip = win.getFutureFlipTime(clock=scanner_TRClock)
-    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-    # update/draw components on each frame
-
-     # ------Prepare to start Routine "scanner_TR"-------
+    # ------Prepare to start Routine "scanner_TR"-------
     continueRoutine = True
     # update component parameters for each repeat
     scanner_F.keys = []
@@ -404,30 +374,8 @@ while continueRoutine:
     _timeToFirstFrame = win.getFutureFlipTime(clock="now")
     scanner_TRClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
     frameN = -1
-    
-    # *scanner_F* updates
-    waitOnFlip = False
-    if scanner_F.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-        # keep track of start time/frame for later
-        scanner_F.frameNStart = frameN  # exact frame index
-        scanner_F.tStart = t  # local t and not account for scr refresh
-        scanner_F.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(scanner_F, 'tStartRefresh')  # time at next scr refresh
-        scanner_F.status = STARTED
-        # keyboard checking is just starting
-        waitOnFlip = True
-        win.callOnFlip(scanner_F.clock.reset)  # t=0 on next screen flip
-        win.callOnFlip(scanner_F.clearEvents, eventType='keyboard')  # clear events on next screen flip
-    if scanner_F.status == STARTED and not waitOnFlip:
-        theseKeys = scanner_F.getKeys(keyList=['t'], waitRelease=False)
-        _scanner_F_allKeys.extend(theseKeys)
-        if len(_scanner_F_allKeys):
-            scanner_F.keys = _scanner_F_allKeys[-1].name  # just the last key pressed
-            scanner_F.rt = _scanner_F_allKeys[-1].rt
-            # a response ends the routine
-            continueRoutine = False
-            
-       # -------Run Routine "scanner_TR"-------
+
+    # -------Run Routine "scanner_TR"-------
     while continueRoutine:
         # get current time
         t = scanner_TRClock.getTime()
@@ -450,7 +398,7 @@ while continueRoutine:
             win.callOnFlip(scanner_F.clock.reset)  # t=0 on next screen flip
             win.callOnFlip(scanner_F.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if scanner_F.status == STARTED and not waitOnFlip:
-            theseKeys = scanner_F.getKeys(keyList=['t'], waitRelease=False)
+            theseKeys = scanner_F.getKeys(keyList=['5'], waitRelease=False)
             _scanner_F_allKeys.extend(theseKeys)
             if len(_scanner_F_allKeys):
                 scanner_F.keys = _scanner_F_allKeys[-1].name  # just the last key pressed
@@ -482,18 +430,9 @@ while continueRoutine:
 
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()         
-            
-    # check for quit (typically the Esc key)
-    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
-        core.quit()
+            win.flip()
 
-    # -------Ending Routine "scanner_TR"-------
-    # check if all components have finished
-    if not continueRoutine:  # a component has requested a forced-end of Routine
-        break
-    continueRoutine = False  # will revert to True if at least one component still running
-    
+  # -------Ending Routine "scanner_TR"-------
     for thisComponent in scanner_TRComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
@@ -514,7 +453,6 @@ while continueRoutine:
     continueRoutine = True
     # update component parameters for each repeat
     curr_dummy = curr_dummy + 1
-
     if curr_dummy <= total_dummy:
         countdown_msg = f'dummy scans remaining: {total_dummy - curr_dummy}'
 
@@ -566,31 +504,6 @@ while continueRoutine:
     # the Routine "countdown" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()
-        
-        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-            continueRoutine = True
-            break  # at least one component has not yet finished
-
-# completed asarray(total_dummy) repeats of 'dummy'
-    # refresh the screen
-    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-        win.flip()
-
-# -------Ending Routine "scanner_TR"-------
-for thisComponent in scanner_TRComponents:
-    if hasattr(thisComponent, "setAutoDraw"):
-        thisComponent.setAutoDraw(False)
-# check responses
-if scanner_F.keys in ['', [], None]:  # No response was made
-    scanner_F.keys = None
-thisExp.addData('scanner_F.keys',scanner_F.keys)
-if scanner_F.keys != None:  # we had a response
-    thisExp.addData('scanner_F.rt', scanner_F.rt)
-thisExp.addData('scanner_F.started', scanner_F.tStartRefresh)
-thisExp.addData('scanner_F.stopped', scanner_F.tStopRefresh)
-thisExp.nextEntry()
-# the Routine "scanner_TR" was not non-slip safe, so reset the non-slip timer
-routineTimer.reset()
 
 # ------Prepare to start Routine "movie"-------
 continueRoutine = True
