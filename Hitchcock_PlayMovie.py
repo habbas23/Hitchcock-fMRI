@@ -8,8 +8,9 @@ If you publish work using this script the most relevant publication is:
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019)
         PsychoPy2: Experiments in behavior made easy Behav Res 51: 195.
         https://doi.org/10.3758/s13428-018-01193-y
-
 """
+
+#Changes: Changed the movie display size
 
 from __future__ import absolute_import, division
 
@@ -128,6 +129,8 @@ countdown_msg = f'dummy scans remaining: {total_dummy - curr_dummy}'
 movieClock = core.Clock()
 hitchcock_video = visual.MovieStim3(
     win=win, name='hitchcock_video',
+    units = 'height',
+    size = (1024, 768), #CHANGE SIZE OF MOVIE ON SCREEN
     noAudio = True,
     filename='BangBang.mov',
     ori=0.0, pos=(0, 0), opacity=0.0,
