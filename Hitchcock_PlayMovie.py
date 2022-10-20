@@ -129,9 +129,9 @@ countdown_msg = f'dummy scans remaining: {total_dummy - curr_dummy}'
 movieClock = core.Clock()
 hitchcock_video = visual.MovieStim3(
     win=win, name='hitchcock_video',
-    units = 'height',
-    size = (1024, 768), #CHANGE SIZE OF MOVIE ON SCREEN
     noAudio = True,
+    units = 'norm',
+    size = (1.125, 1.5), #CHANGE MOVIE SIZE, see https://psychopy.org/general/units.html#units
     filename='BangBang.mov',
     ori=0.0, pos=(0, 0), opacity=0.0,
     loop=False,
